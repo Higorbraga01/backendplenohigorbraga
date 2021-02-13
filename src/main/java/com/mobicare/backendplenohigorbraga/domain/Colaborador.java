@@ -55,7 +55,7 @@ public class Colaborador implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
-		this.idade = getIdade(dataNascimento);
+		this.idade = calcularIdade(dataNascimento);
 		this.setor = setor;
 
 	}
@@ -107,8 +107,12 @@ public class Colaborador implements Serializable {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+	
+	public int getIdade() {
+		return idade = calcularIdade(this.dataNascimento);
+	}
 
-	public int getIdade(Date data) {
+	public int calcularIdade(Date data) {
 		
 		Calendar cData = Calendar.getInstance();
 		Calendar cHoje= Calendar.getInstance();
