@@ -1,38 +1,29 @@
-package com.mobicare.backendplenohigorbraga.domain;
+package com.mobicare.backendplenohigorbraga.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.mobicare.backendplenohigorbraga.domain.Colaborador;
+import com.mobicare.backendplenohigorbraga.domain.Setor;
 
-@Entity
-public class Setor  implements Serializable{
+
+public class SetorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id;	
 	private String descricao;
-	
-	@OneToMany(mappedBy = "setor")
 	private List<Colaborador> colaboradores = new ArrayList<>();
-	
-	public Setor() {
+
+	public SetorDTO() {
 	}
-		
-	public Setor(Integer id, String descricao) {
+
+	public SetorDTO(Setor obj) {
 		super();
-		this.id = id;
-		this.descricao = descricao;
-		this.colaboradores = getColaboradores();
+		this.id = obj.getId();
+		this.descricao = obj.getDescricao();
+		this.colaboradores = obj.getColaboradores();
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -49,7 +40,7 @@ public class Setor  implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	public List<Colaborador> getColaboradores() {
 		return colaboradores;
 	}
@@ -57,5 +48,5 @@ public class Setor  implements Serializable{
 	public void setColaboradores(List<Colaborador> colaboradores) {
 		this.colaboradores = colaboradores;
 	}
-	
+
 }

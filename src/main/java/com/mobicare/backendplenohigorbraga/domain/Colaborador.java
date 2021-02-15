@@ -6,19 +6,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
+@JsonIgnoreProperties({"id","cpf", "telefone", "dataNascimento"})
 public class Colaborador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,12 +35,11 @@ public class Colaborador implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
 
-	@Transient
 	private int idade;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({ "hibernateLazyInitializer" })
-	@JoinTable(name = "COLABORADOR_SETOR", joinColumns = @JoinColumn(name = "colaborador_id"), inverseJoinColumns = @JoinColumn(name = "setor_id"))
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="setor_id")
 	private Setor setor;
 
 	public Colaborador() {
@@ -55,7 +54,7 @@ public class Colaborador implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
-		this.idade = calcularIdade(dataNascimento);
+		this.idade = getIdadeCalculada(dataNascimento);
 		this.setor = setor;
 
 	}
@@ -109,11 +108,10 @@ public class Colaborador implements Serializable {
 	}
 	
 	public int getIdade() {
-		return idade = calcularIdade(this.dataNascimento);
+		return idade = getIdadeCalculada(this.dataNascimento);
 	}
 
-	public int calcularIdade(Date data) {
-		
+	public int getIdadeCalculada(Date data) {
 		Calendar cData = Calendar.getInstance();
 		Calendar cHoje= Calendar.getInstance();
 		cData.setTime(data);

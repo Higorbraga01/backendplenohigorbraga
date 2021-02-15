@@ -4,39 +4,43 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
-import com.mobicare.backendplenohigorbraga.domain.Setor;
 
-public class ColaboradorDTO implements Serializable {
+
+public class BuscaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;	
+	private String descricao;
+	private Integer id;
 	private String cpf;
 	private String nome;
 	private String telefone;
 	private String email;
-	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
-	private int idade;
+	private int idade;	
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer"})
-	private Setor setor;
-	
-	public ColaboradorDTO() {
+	public BuscaDTO() {
 	}
 	
-	public ColaboradorDTO(Colaborador obj) {
+	public BuscaDTO(Colaborador col) {
 		super();
-		this.id = obj.getId();
-		this.cpf = obj.getCpf();
-		this.nome = obj.getNome();
-		this.telefone = obj.getTelefone();
-		this.email = obj.getEmail();
-		this.dataNascimento = obj.getDataNascimento();
-		this.idade = obj.getIdadeCalculada(dataNascimento);
-		
+		this.descricao = col.getSetor().getDescricao();
+		this.id = col.getId();
+		this.cpf = col.getCpf();
+		this.nome = col.getNome();
+		this.email = col.getEmail();
+		this.telefone = col.getTelefone();
+		this.dataNascimento = col.getDataNascimento();
+		this.idade = col.getIdade();
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -45,14 +49,6 @@ public class ColaboradorDTO implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -71,6 +67,14 @@ public class ColaboradorDTO implements Serializable {
 		this.telefone = telefone;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -86,15 +90,6 @@ public class ColaboradorDTO implements Serializable {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
-	public Setor getSetor() {
-		return setor;
-	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
-
 
 	public int getIdade() {
 		return idade;

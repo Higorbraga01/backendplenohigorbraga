@@ -7,5 +7,4 @@ import com.mobicare.backendplenohigorbraga.domain.Setor;
 
 @Repository
 public interface SetorRepository extends JpaRepository<Setor, Integer>  {
-
 }

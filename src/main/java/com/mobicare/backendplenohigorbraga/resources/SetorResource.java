@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,23 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.mobicare.backendplenohigorbraga.domain.Colaborador;
-import com.mobicare.backendplenohigorbraga.dto.BuscaDTO;
-import com.mobicare.backendplenohigorbraga.dto.ColaboradorDTO;
-import com.mobicare.backendplenohigorbraga.services.ColaboradorService;
+import com.mobicare.backendplenohigorbraga.domain.Setor;
+import com.mobicare.backendplenohigorbraga.dto.SetorDTO;
+import com.mobicare.backendplenohigorbraga.services.SetorService;
 
 
 @RestController
-@RequestMapping(value="/colaboradores")
-public class ColaboradorResource {
+@RequestMapping(value="/setores")
+public class SetorResource {
 	
 
 	@Autowired
-	private ColaboradorService service;
+	private SetorService service;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ColaboradorDTO objDto){
-		Colaborador obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody SetorDTO objDto){
+		Setor obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -46,26 +46,26 @@ public class ColaboradorResource {
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<BuscaDTO> find(@PathVariable Integer id) {
-		BuscaDTO objDto = new BuscaDTO();
-		Colaborador obj =  service.find(id);
-		objDto = service.fromOBJ(obj);
-		return ResponseEntity.ok().body(objDto);		
+	public ResponseEntity<Setor> find(@PathVariable Integer id) {
+		Setor obj = service.find(id);
+		return ResponseEntity.ok().body(obj);		
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<BuscaDTO>> findAll() {
-		List<Colaborador> list = service.findAll();
-		List<BuscaDTO> listDto = list.stream().map(obj -> new BuscaDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<SetorDTO>> findAll() {
+		List<Setor> list = service.findAll();
+		List<SetorDTO> listDto = list.stream().map(obj -> new SetorDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);		
 	}
 	
-	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public ResponseEntity<BuscaDTO> search(@RequestParam(name = "cpf") String cpf) {
-		BuscaDTO objDto = new BuscaDTO();
-		Colaborador obj =  service.findByCpf(cpf);
-		objDto = service.fromOBJ(obj);
-		return ResponseEntity.ok().body(objDto);
+	@RequestMapping(value="/page",method = RequestMethod.GET)
+	public ResponseEntity<Page<SetorDTO>> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+		Page<Setor> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<SetorDTO> listDto = list.map(obj -> new SetorDTO(obj));
+		return ResponseEntity.ok().body(listDto);		
 	}
-	
 }

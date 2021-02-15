@@ -5,23 +5,26 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
-import com.mobicare.backendplenohigorbraga.dto.BuscaDTO;
-import com.mobicare.backendplenohigorbraga.dto.ColaboradorDTO;
-import com.mobicare.backendplenohigorbraga.repositories.ColaboradorRepository;
+import com.mobicare.backendplenohigorbraga.domain.Setor;
+import com.mobicare.backendplenohigorbraga.dto.SetorDTO;
+import com.mobicare.backendplenohigorbraga.repositories.SetorRepository;
 import com.mobicare.backendplenohigorbraga.services.exceptions.DataIntegrityException;
 import com.mobicare.backendplenohigorbraga.services.exceptions.ObjectNotFoundException;
 
 
 @Service
-public class ColaboradorService {
+public class SetorService {
 	
 	@Autowired
-	private ColaboradorRepository repo;
+	private SetorRepository repo;
 	
-	public Colaborador insert(Colaborador obj) {
+	public Setor insert(Setor obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
@@ -36,39 +39,33 @@ public class ColaboradorService {
 		}
 	}
 	
-	public Colaborador find(Integer id) {
-		Optional<Colaborador> obj = repo.findById(id);
+	public Setor find(Integer id) {
+		Optional<Setor> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Colaborador.class.getName()));
 		
 	}
 	
-	public Colaborador update(Colaborador obj) {
-		Colaborador  newObj = find(obj.getId());
+	public Setor update(Setor obj) {
+		Setor  newObj = find(obj.getId());
 		updateDate(newObj, obj);
 		return repo.save(newObj);
 	}
 	
-	public List<Colaborador> findAll() {
+	public List<Setor> findAll() {
 		return repo.findAll();		                    
 	}
 	
-	public Colaborador fromDTO(ColaboradorDTO objDto) {
-		return new Colaborador(
-				objDto.getId(),objDto.getCpf(), objDto.getNome(), objDto.getTelefone(),
-				objDto.getEmail(),objDto.getDataNascimento(), objDto.getSetor());
+	public Page<Setor> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
 	}
 	
-	public BuscaDTO fromOBJ(Colaborador obj) {
-		return new BuscaDTO(obj);
+	public Setor fromDTO(SetorDTO objDto) {
+		return new Setor(objDto.getId(), objDto.getDescricao());
 	}
 	
-	private void updateDate(Colaborador newObj, Colaborador obj) {
-		newObj.setNome(obj.getNome());	
+	private void updateDate(Setor newObj, Setor obj) {
+		newObj.setDescricao(obj.getDescricao());	
 	}
-
-	public Colaborador findByCpf(String cpf) {
-		return repo.findByCpf(cpf);
-	}
-
 }
