@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
-import com.mobicare.backendplenohigorbraga.dto.ApiDTO;
 import com.mobicare.backendplenohigorbraga.dto.BuscaDTO;
 import com.mobicare.backendplenohigorbraga.dto.ColaboradorDTO;
-import com.mobicare.backendplenohigorbraga.services.ApiService;
 import com.mobicare.backendplenohigorbraga.services.ColaboradorService;
-import com.mobicare.backendplenohigorbraga.services.exceptions.DataIntegrityException;
 
 @RestController
 @RequestMapping(value = "/colaboradores")
@@ -31,21 +28,14 @@ public class ColaboradorResource {
 	@Autowired
 	private ColaboradorService service;
 
-	@Autowired
-	private ApiService apiService;
-
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ColaboradorDTO objDto) {
-		List<ApiDTO> apiDto = apiService.consumirAPI();
-		for (ApiDTO listApi : apiDto) {
-			listApi.getCpf();
-			if (listApi.getCpf().equals(objDto.getCpf())) {
-				throw new DataIntegrityException("Cadastro não autorizado para este CPF!");
-			}
-		}
 		Colaborador obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(obj.getId())
+				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
