@@ -42,13 +42,13 @@ public class DBService {
 		Colaborador colab7 = new Colaborador(null, "94739100029", "Lenita Braga", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1978 21:55" ), setor2);
 		Colaborador colab8 = new Colaborador(null, "72845480024", "Francisco Antonio", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1975 21:55"), setor4);
 		Colaborador colab9 = new Colaborador(null, "83872073060", "Lorena de paula", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/2002 21:55" ), setor4);
-		Colaborador colab10 = new Colaborador(null, "35589046050", "Lucas Cassiano", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/2003 21:55" ), setor4);
+		Colaborador colab10 = new Colaborador(null, "35589046050", "Lucas Cassiano", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/2004 21:55" ), setor4);
 		Colaborador colab11 = new Colaborador(null, "16437666005", "Arthur de paula", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/2002 21:55" ), setor5);
 		Colaborador colab12 = new Colaborador(null, "64551251003", "Roberto da silva", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1955 21:55" ), setor2);
 		Colaborador colab13 = new Colaborador(null, "42782186051", "Manuela Siqueira", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1991 21:55" ), setor3);
 		Colaborador colab14 = new Colaborador(null, "82011244056", "Alan negreiros", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1990 21:55" ), setor3);
 		Colaborador colab15 = new Colaborador(null, "97608174030", "Marcos Paulo", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1982 21:55" ), setor3);
-		
+
 		setorRepo.saveAll(Arrays.asList(setor1,setor2,setor3,setor4,setor5));
 
 		colabRepo.saveAll(Arrays.asList(

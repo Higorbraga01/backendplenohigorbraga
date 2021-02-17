@@ -35,7 +35,7 @@ public class SetorService {
 			repo.deleteById(id);
 			
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produto");
+			throw new DataIntegrityException("Não é possivel excluir um Setor que possui colaboradores");
 		}
 	}
 	
