@@ -29,14 +29,9 @@ public class ColaboradorService {
 
 	public Colaborador insert(Colaborador obj) {
 		obj.setId(null);
+		consumirAPI(obj);
 		verificaIdadeColaboradoresNoSetor(obj);
 		verificaIdadeColaboradoresSenior(obj);
-		for (ApiDTO apiDTO : consumirAPI()) {
-			apiDTO.getCpf();
-			if (apiDTO.getCpf().equals(obj.getCpf())) {
-				throw new DataIntegrityException("Cadastro não autorizado para este CPF!");
-			}
-		}
 		return repo.save(obj);
 	}
 
@@ -57,7 +52,7 @@ public class ColaboradorService {
 
 	}
 
-	public List<ApiDTO> consumirAPI() {
+	public void consumirAPI(Colaborador obj) {
 		RestTemplate template = new RestTemplate();
 		UriComponents uri = UriComponentsBuilder.newInstance().scheme("https")
 				.host("5e74cb4b9dff120016353b04.mockapi.io").path("api/v1/blacklist").build();
@@ -65,7 +60,13 @@ public class ColaboradorService {
 		ResponseEntity<List<ApiDTO>> responseEntity = template.exchange(uri.toUriString(), HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<ApiDTO>>() {
 				});
-		return responseEntity.getBody();
+
+		for (ApiDTO apiDTO : responseEntity.getBody()) {
+			apiDTO.getCpf();
+			if (apiDTO.getCpf().equals(obj.getCpf())) {
+				throw new DataIntegrityException("Cadastro não autorizado para este CPF!");
+			}
+		}
 	}
 
 	public Colaborador update(Colaborador obj) {
