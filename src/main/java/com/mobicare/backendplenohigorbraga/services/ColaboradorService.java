@@ -98,20 +98,16 @@ public class ColaboradorService {
 	public void verificaIdadeColaboradoresNoSetor(Colaborador obj) {
 		List<Colaborador> colaboradores = repo.findBySetor(obj.getSetor());
 
-		float tamanhoDaListaSetor = 0f;
 		float menoresde18Anos = 0f;
 		final float ratio = 0.2f;
 
 		for (Colaborador colaborador : colaboradores) {
-			if (colaborador != null) {
-				tamanhoDaListaSetor++;
-			}
 			if (colaborador.getIdade() < 18) {
 				menoresde18Anos++;
 			}
 		}
 
-		if ((menoresde18Anos / tamanhoDaListaSetor >= ratio) && obj.getIdade() < 18) {
+		if ((menoresde18Anos / colaboradores.size() >= ratio) && obj.getIdade() < 18) {
 			throw new DataIntegrityException("Limite de Colaboradores no Setor menores que 18 anos excedido");
 		}
 	}
@@ -119,18 +115,16 @@ public class ColaboradorService {
 	public void verificaIdadeColaboradoresSenior(Colaborador obj) {
 		List<Colaborador> colaboradoresAll = repo.findAll();
 
-		float tamanhoDaListaAll = 0f;
 		float maioresde65Anos = 0f;
 		final float ratio = 0.2f;
 
 		for (Colaborador colaborador : colaboradoresAll) {
-			tamanhoDaListaAll++;
 			if (colaborador.getIdade() > 65) {
 				maioresde65Anos++;
 			}
 		}
-		
-		if ((maioresde65Anos / tamanhoDaListaAll >= ratio) && obj.getIdade() > 65) {
+
+		if ((maioresde65Anos / colaboradoresAll.size() >= ratio) && obj.getIdade() > 65) {
 			throw new DataIntegrityException("Limite de Colaboradores na Empresa maiores que 65 anos excedido");
 		}
 	}
