@@ -1,26 +1,26 @@
-Method               Url                                          Code           Response
+Method -----------------Url-----------------------------------------Code--------------Response
 
-GET               /colaboradores                                   200            Array of object
+GET----------------- /colaboradores  -------------------------------200--------------Array of object
 
-GET               /colaboradores/:id                               200            Object
+GET--------------- /colaboradores/:id ------------------------------200--------------Object
     
-GET              /colaboradores/search?cpf=40551753021            200            Object
+GET---------------/colaboradores/search?cpf=40551753021 ------------200 -------------Object
 
-POST             /colaboradores                                    201            No response
+POST--------------- /colaboradores----------------------------------201 -------------No response
 
-DELETE           /colaboradores/:id                                204            No response
+DELETE---------------/colaboradores/:id --------------------------- 204--------------No response
 
-GET              /setores                                            200            Array of object
+GET --------------- /setores -------------------------------------- 200--------------Array of object
 
-POST            /setores                                           201            No response
+POST---------------/setores --------------------------------------- 201--------------No response
 
                        
 
-                        PAGINATION
+--------------------------------------PAGINATION
 
-                                    Add query params to GET requests:
+  --------------------------------/Add query params to GET requests:
 
-·                 /setores/page?page=2&direction=ASC&orderBy=descricao&linesPerPage=1
+·  --------------- /setores/page?page=2&direction=ASC&orderBy=descricao&linesPerPage=1
 
 ·        
 
