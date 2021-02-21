@@ -1,3 +1,5 @@
+- API_URL: https://backendplenohigorbraga.herokuapp.com/colaboradores/ -------
+
 Method -----------------Url-----------------------------------------Code--------------Response
 
 GET----------------- /colaboradores  -------------------------------200--------------Array of object
@@ -20,7 +22,7 @@ POST---------------/setores --------------------------------------- 201---------
 
   --------------------------------/Add query params to GET requests:
 
-·  --------------- /setores/page?page=2&direction=ASC&orderBy=descricao&linesPerPage=1
+·  --------------- /setores/page?page=0&direction=ASC&orderBy=descricao&linesPerPage=2
 
 ·        
 
