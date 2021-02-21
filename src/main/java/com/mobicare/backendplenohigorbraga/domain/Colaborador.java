@@ -32,7 +32,7 @@ public class Colaborador implements Serializable {
 	private String telefone;
 	private String email;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 
 	private int idade;
