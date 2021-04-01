@@ -33,7 +33,7 @@ public class DBService {
 		Setor setor4 = new Setor(null, "Direção");
 		Setor setor5 = new Setor(null, "Plataforma");		
 
-		Colaborador colab1 = new Colaborador(null, "40551753021", "Higor Braga", "21971926933", "emaildeteste@gmail.com", sdf.parse("12/10/1993 21:55"), setor3);
+		Colaborador colab1 = new Colaborador(null, "40551753021", "Higor Braga", "21971926933", "emaildeteste@gmail.com", sdf.parse("12/10/1993 02:09"), setor3);
 		Colaborador colab2 = new Colaborador(null, "73532841029", "Fulano de tal", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1983 21:55"), setor1);
 		Colaborador colab3 = new Colaborador(null, "36926270090", "Ciclano de teste", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1995 21:55"), setor3);
 		Colaborador colab4 = new Colaborador(null, "46126671074", "Yuri Braga", "21971926933", "emaildeteste@gmail.com", sdf.parse("05/02/1997 21:55"), setor3);

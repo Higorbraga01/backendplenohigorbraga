@@ -36,6 +36,7 @@ public class ColaboradorDTO implements Serializable {
 		this.email = obj.getEmail();
 		this.dataNascimento = obj.getDataNascimento();
 		this.idade = obj.getIdadeCalculada(dataNascimento);
+		this.setor = obj.getSetor();
 		
 	}
 

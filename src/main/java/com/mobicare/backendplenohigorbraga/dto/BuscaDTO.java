@@ -10,7 +10,7 @@ import com.mobicare.backendplenohigorbraga.domain.Colaborador;
 public class BuscaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String descricao;
+	private String setor;
 	private Integer id;
 	private String cpf;
 	private String nome;
@@ -25,7 +25,7 @@ public class BuscaDTO implements Serializable {
 	
 	public BuscaDTO(Colaborador col) {
 		super();
-		this.descricao = col.getSetor().getDescricao();
+		this.setor = col.getSetor().getDescricao();
 		this.id = col.getId();
 		this.cpf = col.getCpf();
 		this.nome = col.getNome();
@@ -35,12 +35,12 @@ public class BuscaDTO implements Serializable {
 		this.idade = col.getIdade();
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getSetor() {
+		return setor;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setSetor(String setor) {
+		this.setor = setor;
 	}
 
 	public Integer getId() {
