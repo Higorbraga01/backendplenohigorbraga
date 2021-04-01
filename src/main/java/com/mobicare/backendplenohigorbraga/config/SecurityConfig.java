@@ -35,6 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/setores/**"
 		};
 	
+	private static final String[] PUBLIC_MATCHES_PUT = {
+			"/colaboradores/**",
+			"/setores/**"
+		};
+	
 	private static final String[] PUBLIC_MATCHES_DELETE = {
 			"/colaboradores/**",
 			"/setores/**"
@@ -51,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, PUBLIC_MATCHES_POST).permitAll()
 		.antMatchers(HttpMethod.GET, PUBLIC_MATCHES_GET).permitAll()
+		.antMatchers(HttpMethod.PUT, PUBLIC_MATCHES_PUT).permitAll()
 		.antMatchers(HttpMethod.DELETE, PUBLIC_MATCHES_DELETE).permitAll()
 		.antMatchers(PUBLIC_MATCHES).permitAll()
 		.anyRequest().authenticated();
