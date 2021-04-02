@@ -70,9 +70,7 @@ public class ColaboradorService {
 	}
 
 	public Colaborador update(Colaborador obj) {
-		Colaborador newObj = find(obj.getId());
-		updateDate(newObj, obj);
-		return repo.save(newObj);
+		return repo.save(obj);
 	}
 
 	public List<Colaborador> findAll() {
@@ -86,10 +84,6 @@ public class ColaboradorService {
 
 	public BuscaDTO fromOBJ(Colaborador obj) {
 		return new BuscaDTO(obj);
-	}
-
-	private void updateDate(Colaborador newObj, Colaborador obj) {
-		newObj.setNome(obj.getNome());
 	}
 
 	public Colaborador findByCpf(String cpf) {
