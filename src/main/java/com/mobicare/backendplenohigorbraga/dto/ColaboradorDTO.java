@@ -3,7 +3,6 @@ package com.mobicare.backendplenohigorbraga.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
 import com.mobicare.backendplenohigorbraga.domain.Setor;
@@ -17,7 +16,7 @@ public class ColaboradorDTO implements Serializable {
 	private String telefone;
 	private String email;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	
 	private Date dataNascimento;
 	private int idade;
 	
