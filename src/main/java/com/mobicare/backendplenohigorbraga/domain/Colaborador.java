@@ -31,7 +31,6 @@ public class Colaborador implements Serializable {
 	private String telefone;
 	private String email;
 	private Date dataNascimento;
-
 	private int idade;
 
 	@JsonIgnore

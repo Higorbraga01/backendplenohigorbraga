@@ -3,20 +3,19 @@ package com.mobicare.backendplenohigorbraga.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
+import com.mobicare.backendplenohigorbraga.domain.Setor;
 
 
 public class BuscaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String setor;
+	private Setor setor;
 	private Integer id;
 	private String cpf;
 	private String nome;
 	private String telefone;
 	private String email;
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 	private int idade;	
 	
@@ -25,7 +24,7 @@ public class BuscaDTO implements Serializable {
 	
 	public BuscaDTO(Colaborador col) {
 		super();
-		this.setor = col.getSetor().getDescricao();
+		this.setor = col.getSetor();
 		this.id = col.getId();
 		this.cpf = col.getCpf();
 		this.nome = col.getNome();
@@ -35,11 +34,11 @@ public class BuscaDTO implements Serializable {
 		this.idade = col.getIdade();
 	}
 
-	public String getSetor() {
+	public Setor getSetor() {
 		return setor;
 	}
 
-	public void setSetor(String setor) {
+	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
 

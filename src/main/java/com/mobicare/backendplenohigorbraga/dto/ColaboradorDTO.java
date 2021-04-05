@@ -3,7 +3,6 @@ package com.mobicare.backendplenohigorbraga.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
 import com.mobicare.backendplenohigorbraga.domain.Setor;
 
@@ -15,12 +14,8 @@ public class ColaboradorDTO implements Serializable {
 	private String nome;
 	private String telefone;
 	private String email;
-	
-	
 	private Date dataNascimento;
 	private int idade;
-	
-	@JsonIgnoreProperties({"hibernateLazyInitializer"})
 	private Setor setor;
 	
 	public ColaboradorDTO() {
