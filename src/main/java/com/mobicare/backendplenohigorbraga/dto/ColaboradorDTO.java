@@ -1,6 +1,7 @@
 package com.mobicare.backendplenohigorbraga.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.mobicare.backendplenohigorbraga.domain.Colaborador;
@@ -14,7 +15,7 @@ public class ColaboradorDTO implements Serializable {
 	private String nome;
 	private String telefone;
 	private String email;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private int idade;
 	private Setor setor;
 	
@@ -74,11 +75,11 @@ public class ColaboradorDTO implements Serializable {
 		this.email = email;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

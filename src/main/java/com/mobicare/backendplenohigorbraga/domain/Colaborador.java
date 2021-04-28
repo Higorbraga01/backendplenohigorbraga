@@ -1,6 +1,8 @@
 package com.mobicare.backendplenohigorbraga.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,7 +32,7 @@ public class Colaborador implements Serializable {
 	private String nome;
 	private String telefone;
 	private String email;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private int idade;
 
 	@JsonIgnore
@@ -41,7 +43,7 @@ public class Colaborador implements Serializable {
 	public Colaborador() {
 	}
 
-	public Colaborador(Integer id, String cpf, String nome, String telefone, String email, Date dataNascimento,
+	public Colaborador(Integer id, String cpf, String nome, String telefone, String email, LocalDate dataNascimento,
 			Setor setor) {
 		super();
 		this.id = id;
@@ -95,11 +97,11 @@ public class Colaborador implements Serializable {
 		this.email = email;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	
@@ -107,15 +109,10 @@ public class Colaborador implements Serializable {
 		return idade = getIdadeCalculada(this.dataNascimento);
 	}
 
-	public int getIdadeCalculada(Date data) {
-		Calendar cData = Calendar.getInstance();
-		Calendar cHoje= Calendar.getInstance();
-		cData.setTime(data);
-		cData.set(Calendar.YEAR, cHoje.get(Calendar.YEAR));
-		this.idade = cData.after(cHoje) ? -1 : 0;
-		cData.setTime(data);
-		idade += cHoje.get(Calendar.YEAR) - cData.get(Calendar.YEAR);
-		return this.idade;
+	public int getIdadeCalculada(LocalDate dtAniversario) {
+		LocalDate hoje = LocalDate.now();
+		Period period = Period.between(dtAniversario, hoje);
+		return period.getYears();
 	}
 
 	public Setor getSetor() {
